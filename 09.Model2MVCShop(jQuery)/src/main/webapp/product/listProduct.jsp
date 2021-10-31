@@ -28,8 +28,11 @@ function fncGetUserList(currentPage) {
 	//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함. 
 	 $( "td.ct_btn01:contains('검색')" ).on("click" , function() {
 		//Debug..
-		alert(  $( "td.ct_btn01:contains('검색')" ).html() );
-		fncGetUserList(1); 
+		//alert(  $( "td.ct_btn01:contains('검색')" ).html() );
+		$("#currentPage").val(1);
+		$('input[name="menu"]').val('${menu}'); 
+		$("form").attr("method" , "POST").attr("action" , "/product/listProduct").submit();
+
 	});
 	
 	$('.prodName').on("click" , function() {
@@ -39,11 +42,20 @@ function fncGetUserList(currentPage) {
 					console.log(text);
 					var prodNo = $(this).next().text();
 					console.log(prodNo);
+					if('${menu}'=='manage')
+					{
+					self.location='/product/updateProductView?prodNo='+prodNo;
+
+					}
+					if('${menu}'=='search'){
 					self.location='/product/getProduct?prodNo='+prodNo;
+
+					}	
+					
 	});
 	
 	//==> UI 수정 추가부분  :  userId LINK Event End User 에게 보일수 있도록 
-	$( ".ct_list_pop td:nth-child(3)" ).css("color" , "red");
+	$( ".ct_list_pop td:nth-child(3)" ).css("color" , "blue");
 	$("h7").css("color" , "red");
 	
 	

@@ -10,7 +10,6 @@
 %>	
 --%>
 
-<%  System.out.println("진입");  %>
 <html>
 <head>
 <title>회원정보수정</title>
@@ -18,15 +17,27 @@
 <link rel="stylesheet" href="/css/admin.css" type="text/css">
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
+
+function fncUpdateProduct() {
+	var name=$("input[name='prodName']").val();
+	
+	if(name == null || name.length <1){
+		alert("상품명은 반드시 입력하셔야 합니다.");
+		return;
+	}
+		$("form").attr("method" , "POST").attr("action" , "/product/updateProduct").submit();
+}
 $(function() {
 	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 	//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
 	 $( "td.ct_btn01:contains('수정')" ).on("click" , function() {
 		//Debug..
 		//alert(  $( "td.ct_btn01:contains('수정')" ).html() );
-		fncUpdateUser();
+		fncUpdateProduct();
 	});
 });	
+
+
 $(function() {
 	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 	//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
